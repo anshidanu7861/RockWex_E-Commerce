@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assetsAdmin/img/favicon.png" rel="icon">
+  <link href="/assetsAdmin/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assetsAdmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assetsAdmin/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assetsAdmin/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>User Details</h1>
+      <nav>
+       
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Users</h5>
+
+              <!-- Dark Table -->
+              <table class="table datatable table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    {{!-- <th scope="col">Status</th> --}}
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each UserDetails}}
+                  <tr>
+                    <th scope="row">{{inc @index}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.number}}</td>
+             
+                    {{!-- <td>2016-05-25</td> --}}
+                    
+                    <td>
+                      {{#if userStatus}}
+
+                       <a href="/admin/block/{{this._id}}" class="btn btn-danger">Block</a>
+                        {{else}}
+                         <a href="/admin/unblock/{{this._id}}" class="btn btn-success">Unblock</a>
+                         {{/if}}
+                      </td>
+                    
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <!-- End Dark Table -->
+
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assetsAdmin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assetsAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assetsAdmin/vendor/chart.js/chart.min.js"></script>
+  <script src="/assetsAdmin/vendor/echarts/echarts.min.js"></script>
+  <script src="/assetsAdmin/vendor/quill/quill.min.js"></script>
+  <script src="/assetsAdmin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assetsAdmin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assetsAdmin/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assetsAdmin/js/main.js"></script>
+
+</body>
+
+</html>

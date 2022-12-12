@@ -1,0 +1,91 @@
+<body>
+    <div class="page-header text-center">
+    {{#each returnData}}
+        <div class="container">
+            <h1 class="page-title"> Return Order<span>RockWex</span></h1>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <img src="/picture/product-images/{{this.product.img.[0]}}" alt="" class="m-5" style="height: 60%;">
+                </div>
+
+                <div class="col-md-4 mt-2">
+                    <p>Quantity : <b>{{this.quantity}}</b></p>
+                    <p>Amount Paid: <b> Rs {{this.price}}</b></p><br>
+                    <h6>Deliver To : </h6>
+                    <b class="text-warning">Anshid</b>
+                    <p>xfth,
+                        ,<br>
+                        sg,
+                        kerala <br>
+                        drhtj</p>
+                </div>
+                <div class="col-md-4">
+                   <form id="returnForm">
+                     <div class="d-flex">
+                        <div>Reason for Returinig</div> &nbsp;<input type="text" id="reasonId" name="reason" class="form-control">
+                    </div>
+                     <div class="d-flex mt-5">
+                    <div>Description </div>&nbsp;&nbsp; <input id="discriptionId" name="freeform" rows="4" cols="90">
+                    </div>
+                    <div class="mb-5">
+                        <input type="text" name="orderId" id="" value="" hidden>
+                    <input type="text" name="userId" value="" hidden>
+                    <input type="text" name="prodId" value="" hidden>
+                    </div>
+                 <div>
+                         <button class="btn btn-info" name="trackOrder" id="" onclick="Return('{{this._id}}','{{this.product._id}}')" type="submit">Return Order</button>
+                      </div>
+                   </form>
+                </div>
+            </div>
+            
+            </div>
+            {{/each}}
+        </div><!-- End .container -->
+    </div>
+  
+
+</body>
+
+<script>
+  function Return(orderId, proId){
+        let reason = document.getElementById('reasonId').value;
+        let discription = document.getElementById('discriptionId').value;
+       $.ajax({
+      url:'/returnOrder',
+      method:'post',
+      data:{
+        orderId:orderId,
+        proId:proId,
+        reason:reason,
+        description:discription
+   
+      },
+      success:(response)=>{
+     if(response.status){
+      Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, cancel it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Return Order!',
+      'Return Request sented.',
+      'success'
+    )
+ 
+  }
+})
+
+     }
+     
+      }
+
+    })
+  }
+</script>

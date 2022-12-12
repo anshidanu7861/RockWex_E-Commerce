@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+<head>
+   
+	<link rel="stylesheet" href="/stylesheets/tables.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+                
+        </header><!-- End .header -->
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">Checkout<span>RockWex</span></h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="checkout">
+
+
+	                <div class="container">
+							<a class="text text-primary " href="#showModal" data-toggle="modal">Have a coupon</a>
+            			<div class="checkout-discount">	
+							<div class="row">
+
+            				<form class="form" action="/addCoupon" method="post">
+        						<input type="text" class="form-control" name="coupon" required id="checkout-discount-input" placeholder="Have a coupon ?" value="">
+
+								<p class="text text-success" id="couponAppplied"></p>
+
+									<input type="text" class="form-control" name="percentage" required id="couponPercentage" value="" hidden>
+								
+            				</form>
+							</div>
+            			</div><!-- End .checkout-discount -->
+						
+
+            			<form  id="checkoutForm">
+						<div class="d-md-flex col-md-9">
+		                	<div class="row col-md-12" >
+								<div class="col-md-12">
+                                 {{#each userAddress}}
+								    <div class="col-md-12">
+                                        
+                                            <label class="card">
+                                                <input name="deliveryDetails" class="radio" type="radio" checked value="{{this._id}}">
+                                                <span class="plan-details">
+                                                    <span class="plan-type">{{this.Fname}}</span>
+                                                    <p class="text-danger">+91 {{this.phonenumber}}<span class="text-primary">  , &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{this.company}},{{this.country}},
+                                                    {{this.address}},{{this.apartment}},{{this.location}},{{this.state}},{{this.pincode}}
+                                                    {{this.phonenumber}} </span></p>
+                                                    <span>{{this.email}}</span>
+													<div>
+													<a class="edit btn-info" href="/editAddress/{{this._id}}">Edit</a>
+													</div>
+                                                </span>
+                                            </label>
+                                    </div>
+                                    {{/each}}
+
+										<div class="address m-5 ">
+            						<a class="btn btn-primary " href="/addAddress">Add Address</a>
+           						</div>
+		                			</div>
+							
+								</div>
+								{{#if userAddress}}
+                              	  <aside class="col-lg-4" >
+		                			<div class="summary" >
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+
+		                					<tbody>
+		                						<tr>
+		                							<td><a href="#">Beige knitted elastic runner shoes</a></td>
+		                							<td>$84.00</td>
+		                						</tr>
+
+		                						<tr class="summary-subtotal">
+		                							<td>Subtotal:</td>
+		                							<td>{{total}}</td>
+													
+		                						</tr><!-- End .summary-subtotal -->
+		                						<tr>
+													
+		                							<td>Shipping:</td>
+		                							<td>Free shipping</td>
+		                						</tr>
+		                						<tr class="summary-total">
+		                							<td>Offer :</td>
+		                							<td id="totalAmount">{{total}}</td>
+													<input type="text" id="total" value="{{total}}" hidden>
+													<input type="text" id="newTotal" name="newTotal" value="{{total}}" hidden>
+													<input type="text" id="walletBalance" name="" value="{{walletBalance.balance}}" hidden>
+		                						</tr><!-- End .summary-total -->
+		                					</tbody>
+		                				</table><!-- End .table table-summary -->
+
+		                				<div class="accordion-summary" id="accordion-payment">
+
+											<input type="text" name="couponName" id="Cname" hidden>
+											<input type="text" name="couponPercentage" id="percentage" hidden>
+
+                                            <div class="">
+                                         	<input type="radio" class="payment" id="COD" value="COD" name="paymentMethod">
+											<label class="payment" for="checkout-create-acc">Cash On Delivery</label>
+                                            </div>
+
+                                            <div>
+                                            <input type="radio" class="payment" id="PayPal" value="PayPal" name="paymentMethod">
+											<label class="payment" for="checkout-create-acc">PayPal</label>
+                                           </div> 
+
+
+                                            <div>
+                                            <input type="radio" class="payment" id="RazorPay" value="RazorPay" name="paymentMethod">
+											<label class="payment" for="checkout-create-acc">RazorPay</label>
+                                           </div> 
+
+
+                                            <div id="hideBotton">
+                                            <input type="radio" class="payment" onclick="checkwallet()" id="WalletRadio" value="wallet" name="paymentMethod" >
+											<label class="payment" for="checkout-create-acc" >Wallet</label>
+                                           </div> 
+											  
+		                				<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+											
+		                				<span>Place Order</span>
+										
+		                				</button>
+										
+		                				</div><!-- End .summary -->
+		                			</aside><!-- End .col-lg-3 -->
+							</div>
+							
+						</form>
+		              		  </div><!-- End .row -->
+
+					
+
+								{{else}}
+										<h4 class="text text-danger">AddAddress</h4>
+								
+								{{/if}}
+
+								</div>
+								
+							
+
+		
+
+
+
+			{{!-- _________________________________SHOW COUPONS_________________________________ --}}
+
+
+				<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-hidden="true">
+        		 <div class="modal-dialog modal-dialog-centered" role="document">
+           		 <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+				<form class="form" >
+
+                    <div class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Add Coupon</a>
+                                </li>
+                             
+                            </ul>
+                            <div class="tab-content" id="tab-content-5">
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+
+									{{#each showCoupon}}
+
+                                     <div class="">
+                                        
+                                            <label class="card">
+                                                <input name="couponDetails"  id="couponDetails" class="radio" type="radio" data-dismiss="modal" onclick="getCoupon('{{this._id}}','{{../total}}')"  checked >
+                                                <span class="plan-details">
+                                                    <span class="plan-type">{{this.couponName}}</span>
+                                                    <p class="text-danger">{{this.couponOffer}}%<span class="text-primary"> , &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                     </span></p>
+                                                    <span >Claim It Before Expiring</span>
+													<div>
+													</div>
+													
+                                                </span>
+                                            </label>
+                                    </div>
+
+                                   {{/each}}
+			
+
+                               		 </div><!-- .End .tab-pane -->
+                              
+                           			 </div><!-- End .tab-content -->
+                        		</div><!-- End .form-tab -->
+                    		</div><!-- End .form-box -->
+				</form>
+                		</div><!-- End .modal-body -->
+            		</div><!-- End .modal-content -->
+        	 	</div><!-- End .modal-dialog -->
+    		</div><!-- End .modal -->
+
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+        <footer class="footer">
+        	<div class="footer-middle">
+	            <div class="container">
+	            	<div class="row">
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget widget-about">
+	            				<img src="assets/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+	            				<p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+
+	            				<div class="social-icons">
+	            					<a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Pinterest"><i class="icon-pinterest"></i></a>
+	            				</div><!-- End .soial-icons -->
+	            			</div><!-- End .widget about-widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="about.html">About Molla</a></li>
+	            					<li><a href="#">How to shop on Molla</a></li>
+	            					<li><a href="#">FAQ</a></li>
+	            					<li><a href="contact.html">Contact us</a></li>
+	            					<li><a href="login.html">Log in</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Payment Methods</a></li>
+	            					<li><a href="#">Money-back guarantee!</a></li>
+	            					<li><a href="#">Returns</a></li>
+	            					<li><a href="#">Shipping</a></li>
+	            					<li><a href="#">Terms and conditions</a></li>
+	            					<li><a href="#">Privacy Policy</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Sign In</a></li>
+	            					<li><a href="cart.html">View Cart</a></li>
+	            					<li><a href="#">My Wishlist</a></li>
+	            					<li><a href="#">Track My Order</a></li>
+	            					<li><a href="#">Help</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+	            	</div><!-- End .row -->
+	            </div><!-- End .container -->
+	        </div><!-- End .footer-middle -->
+
+	        <div class="footer-bottom">
+	        	<div class="container">
+	        		<p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<figure class="footer-payments">
+	        			<img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
+	        		</figure><!-- End .footer-payments -->
+	        	</div><!-- End .container -->
+	        </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+   
+
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+
+	
+
+
+    <script>
+     
+		$('#checkoutForm').submit((e)=>{
+			e.preventDefault(),
+			$.ajax({
+				url:'/checkout',
+				method:'post',
+				data:$('#checkoutForm').serialize(),
+				success:(response)=>{	
+					if(response.paymentMethod=='COD'){
+						location.href = '/OrderSuccess'
+					}else if(response.paymentMethod=='RazorPay'){
+					
+						razorpayPayment(response.razorpayDetails)
+					
+					}else if(response.paymentMethod=='PayPal'){
+						location.href=response.paypalDetails
+					}else if(response){
+					
+							location.href = '/OrderSuccess'
+					
+					}
+				}
+			})
+		})
+
+	function razorpayPayment(order){
+		
+	var options = {
+    "key": "rzp_test_Wv9xJW28xoKYqL", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "RockWex",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+				
+		verifyPayment(response,order);
+		
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+			rzp1.open();
+}
+
+		function verifyPayment(payment, order){
+	
+			$.ajax({
+			
+				url:'/verifyPayment',
+				data:{
+					payment,
+					order,
+				},
+				type:'post',
+				success:(response)=>{
+					if(response.status){
+						location.href='/OrderSuccess'
+					}else{
+						alert('Payment Failed ')
+					}
+				}
+			})
+		}
+
+    </script>
+
+
+	
+
+	{{!-- _______________________________________Coupons_____________________________ --}}
+
+<script>
+function getCoupon(couponId, total){
+	$.ajax({
+		url:'/getCoupon/'+couponId,
+		type:'get',
+		success:(response)=>{
+			document.getElementById("Cname").value = response.couponName
+			document.getElementById('percentage').value = response.couponOffer
+			  document.getElementById("checkout-discount-input").value = response.couponName;
+			  document.getElementById("couponPercentage").value = response.couponOffer;
+			perc = response.couponOffer
+			total = document.getElementById('total').value
+			limit = total*40/100
+			offerPrice = limit*perc/100
+			finalPrice = total-offerPrice
+
+			document.getElementById('totalAmount').innerHTML = Math.ceil(finalPrice)
+			document.getElementById('newTotal').value = Math.ceil(finalPrice)
+			document.getElementById('couponAppplied').innerHTML = "Coupon Applied!"
+
+			$('#showModal').modal('hide')
+		}
+	})
+}
+</script>
+
+<script>
+	function checkwallet(){
+		totalPrice = document.getElementById('newTotal').value
+		walletBalence = document.getElementById('walletBalance').value
+		if(totalPrice>=walletBalence){
+		Swal.fire({
+  	icon: 'error',
+  	title: 'Insufficient Balance',
+	}).then(()=>{
+		document.getElementById('hideBotton').style.display = 'none'
+		})
+			
+		}
+	}
+</script>
+
+
+</body>
+
+<!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+</html>

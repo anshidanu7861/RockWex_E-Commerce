@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/category-4cols.html  22 Nov 2019 10:02:52 GMT -->
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RockWex</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/icons/site.html">
+    <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">    
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+    <!-- Main CSS File -->
+   
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/plugins/nouislider/nouislider.css">
+    
+</head>
+
+
+<div class="container" >
+  <div class="form xl-6 sm-12">
+
+    <form action="/eidtAddressProfileSide/{{editData._id}}" method="post">
+      <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+      <div class="row">
+        <div class="col-sm-6">
+          <label>First Name *</label>
+          <input type="text" class="form-control" required name="Fname" value="{{editData.Fname}}"/>
+        </div><!-- End .col-sm-6 -->
+
+        <div class="col-sm-6">
+          <label>Last Name *</label>
+          <input type="text" class="form-control" required name="Lname" value="{{editData.Lname}}" />
+        </div><!-- End .col-sm-6 -->
+      </div><!-- End .row -->
+
+      <label>Company Name (Optional)</label>
+      <input type="text" class="form-control" name="company" value="{{editData.company}}" />
+
+      <label>Country *</label>
+      <input type="text" class="form-control" required name="country" value="{{editData.country}}"/>
+
+      <label>Street address *</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="House number and Street name"
+        required
+        name="address" value="{{editData.address}}"
+      />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Appartments, suite, unit etc ..."
+        required
+        name="apartment" value="{{editData.apartment}}"
+      />
+
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Town / City *</label>
+          <input type="text" class="form-control" required name="location" value="{{editData.location}}"/>
+        </div><!-- End .col-sm-6 -->
+
+        <div class="col-sm-6">
+          <label>State / County *</label>
+          <input type="text" class="form-control" required name="state" value="{{editData.state}}" />
+        </div><!-- End .col-sm-6 -->
+      </div><!-- End .row -->
+
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Postcode / ZIP *</label>
+          <input type="text" class="form-control" required name="pincode" value="{{editData.pincode}}"/>
+        </div><!-- End .col-sm-6 -->
+
+        <div class="col-sm-6">
+          <label>Phone *</label>
+          <input type="tel" class="form-control" required name="phonenumber" value="{{editData.phonenumber}}"/>
+        </div><!-- End .col-sm-6 -->
+      </div><!-- End .row -->
+
+      <label>Email address *</label>
+      <input type="email" class="form-control" required name="email" value="{{editData.email}}"/>
+      <input type="text" name="userId" value="{{User._id}}" hidden>
+
+      <button
+        type="submit"
+        class="btn btn-outline-primary-2 btn-order btn-block">
+        <span class="btn-text">Change Address</span>
+        <span class="btn-hover-text">change Address</span>
+      </button>
+
+    </form>
+  </div>
+</div>
+<hr>

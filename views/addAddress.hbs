@@ -1,0 +1,70 @@
+                                     <div class="container">
+                                        <div class="form col-lg-12">
+                                     
+                                        <form id="addressDetails" action="/address" method="post">
+                                        <hr>
+                                        <h2 class="checkout-title text-center">Add Your Address</h2><!-- End .checkout-title -->
+                                        <hr>
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>First Name *</label>
+		                						<input type="text" class="form-control" required name="Fname">
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Last Name *</label>
+		                						<input type="text" class="form-control" required  name="Lname">
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+	            						<label>Company Name (Optional)</label>
+	            						<input type="text" class="form-control" name="company">
+
+	            						<label>Country *</label>
+	            						<input type="text" class="form-control" required name="country">
+
+	            						<label>Street address *</label>
+	            						<input type="text" class="form-control" placeholder="House number and Street name" required name="address">
+	            						<input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." required name="apartment">
+
+	            						<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Town / City *</label>
+		                						<input type="text" class="form-control" required name="location">
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>State / County *</label>
+		                						<input type="text" class="form-control" required name="state">
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Postcode / ZIP *</label>
+		                						<input type="text" class="form-control" required name="pincode">
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Phone *</label>
+		                						<input type="tel" class="form-control" required name="phonenumber">
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+	                					<label>Email address *</label>
+	        							<input type="email" class="form-control" required name="email">
+                                           <input type="text" name="userId" value="{{User._id}}" hidden>
+
+                                            <div class="">
+                                           	<button type="submit"  class="btn btn-outline-primary-2 btn-order btn-block">
+		                					<span class="btn-text">Save Address</span>
+		                					<span class="btn-hover-text">Save Address</span>
+		                				</button>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+
+                                    </form>
+                                    </div>
+                                    </div>

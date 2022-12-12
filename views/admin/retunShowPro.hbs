@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="/stylesheets/orderPage.css">
+
+<section class="h-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+         
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #a8729a;">Ordered Products</p>
+            </div>
+            {{#each getReturnPro}}
+            <div class="card shadow-0 border mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <img src="/picture/product-images/{{this.productDetails.img.[0]}}"
+                      class="img-fluid" alt="Phone">
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">{{this.name}}</p>
+                  </div>
+                
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Product Name: {{this.productDetails.name}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Qty: {{this.products.quantity}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">₹ {{this.products.price}}</p>
+                  </div>
+                       
+                
+                </div>
+                <div class="row d-flex align-items-center">
+                  <br><br><br><br>
+                  <h5 class="text-danger">{{this.products.trackOrder}}</h5>
+              
+                    <div class="" style="margin-left: 50%;">
+
+                  <a class="btn btn-primary" onclick="approveReturn('{{this._id}}','{{this.products._id}}')">Approved</a>
+                  </div>
+                      <div class="row">
+                    <div>
+                    <p class="text" style="margin-left: 60px;">Reason: {{this.products.reasonReturn}}</p>
+                    </div>
+                    <div>
+                      <br>
+                    <p>Description: {{this.products.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+           
+
+            
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</section>        
+
+
+<script>
+  function approveReturn(orderId, prodId){
+       $.ajax({
+      url:'/admin/approveStatus/'+orderId,
+        method:'post',
+      success:(response)=>{
+     if(response.status){
+      location.reload()
+     }
+        
+      }
+    })
+  }
+</script>
