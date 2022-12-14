@@ -166,6 +166,12 @@ if(req.session.adminLogIn){
     let Dailysales =await productHelpers.dailySailsReport()
     let MonthlySales = await productHelpers.monthlySailsReport()
     let YearlySale = await productHelpers.yearlySailsReport()
+    console.log(Dailysales);
+    console.log('daily');
+    console.log(MonthlySales);
+    console.log('month');
+    console.log(YearlySale);
+    console.log('year');
     res.render("admin/admin-index",{ admin:true, Dailysales, MonthlySales, YearlySale}) 
 }
 else{

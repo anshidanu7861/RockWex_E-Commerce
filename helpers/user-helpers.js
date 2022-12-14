@@ -445,7 +445,7 @@ module.exports= {
             totalAmount:total,
             trackOrder:status,
             date:date.getDate()+'/'+(date. getMonth()+1)+'/'+date.getFullYear(),
-            time:date.getHours()+':'+(date. getMinutes()+1)+':'+date.getSeconds()
+            time:new Date().getTime()
            } 
 
            products.forEach(element => {
@@ -521,7 +521,6 @@ module.exports= {
     }, 
 
   getOrderDetails:(UserId)=>{
-    console.log(UserId);
     return new Promise((resolve, reject)=>{
         db.get().collection(collections.ORDER_COLLECTION).find({userId:ObjectID(UserId)}).sort({time:-1}).toArray().then((response)=>{
             resolve(response)
@@ -880,7 +879,6 @@ wishlistProductRemove:(removeDetails)=>{
 
 
 moveCart:(ProId,userId)=>{ 
-    console.log(ProId);
     return new Promise(async(resolve, reject)=>{
         let productObj = {
             item:ObjectID(ProId),
@@ -1049,7 +1047,6 @@ cancelOrderUser:(details)=>{
                 }
             }
         ]).toArray()
-        console.log(showReturnPro);
         resolve(showReturnPro)
     })
  },
